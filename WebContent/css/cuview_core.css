@@ -1,0 +1,43 @@
+body{
+	margin: 0px;
+}
+#TopNavigation{
+    position: absolute;
+    top: 0px;
+    width:100%;
+    height:50px;
+    border-right: 1.5px solid #125a86;
+    background-color: #162137;
+    color:#ffffff;
+}
+#TopNavigation h4{
+    float: left;
+    font-size: 20px;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 20px;
+    font-weight: normal;
+}
+#TopNavigation ul{
+    float: right;
+}
+#TopNavigation ul li{
+	list-style-type:none;
+    cursor:pointer;
+    float: left;
+    margin-right: 20px;
+}
+#CuviewBody{
+    width:100%;
+    height: calc(100% - 90px);
+}
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    height: 40px;
+    text-align: right;
+    background-color: #162137;
+    color:#62A5FF;
+}
+

@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/cuview_core.js"></script>
+<script src="js/models/clay_vector.js"></script>
+<script src="js/views/clay_resources.js"></script>
+<script src="//cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<!-- 스프레드시트라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/gurubenka-handsontable-excel/js/jquery.handsontable.full.js"></script>
+<link rel="stylesheet" media="screen" href="js/gurubenka-handsontable-excel/css/jquery.handsontable.full.css">
+<script src="js/gurubenka-handsontable-excel/jquery.handsontable-excel.js"></script>
+	
+<!-- 미니맵 라이브러리 -->
+<script src="js/jquery-minimap.js"></script>
+<link href="css/cuview_practice.css" rel="stylesheet" />
+<script src="js/cuview_practice_core.js"></script>
+</head>
+<body>
+<div id ="headerNav">
+<!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!-- <a class="navbar-brand" href="index.action"><img src="<c:url value="/image/mlcamp.png"/>"></a> -->
+                <a class="navbar-brand" href="index.action"><img src="resources/image/mlcamp.png"/></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#page-top"></a></li>
+                        <li><a href="practice.action">PRACTICE</a></li>
+                        <li><a href="boardList.action">COURSE_REGISTER</a></li>
+                        <li><a href="boardCourseList.action">COURSE</a></li>
+                        <!-- <li><a href="boardLogin.action">LOGIN</a></li>-->
+                    	<!-- 모달로 로그인  start-->
+                        <li><a onclick="window.open('boardLogin.action', '로그인','width=600, height=800'); return false">LOGIN</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</div>
+<div id="ClayNavigation">
+	<!-- <form>
+		<input style="color:#6b86a6;" type="text" name="search" placeholder="Search...">
+	</form> -->
+	<div id="VectorTreeView">
+		<ul>
+			<li><input type="checkbox" id="TreeFolderExample" /><label for="TreeFolderExample">Examples</label>
+				<ul>
+		            <li><div class="CuviewExample" id="Example1" draggable="true" ondragstart="drag(event)">Example1</div></li>
+				</ul>
+			</li>
+			<li><input type="checkbox" id="TreeFolderDataSet"/><label for="TreeFolderDataSet">DataSet</label>
+				<ul>
+					<li><div class="RawDataSet" id="1D Array" draggable="true" ondragstart="drag(event)">1D Array</div></li>
+				</ul>
+			</li>
+		    <li><input type="checkbox" id="TreeFolderOperator"/><label for="TreeFolderOperator">SL Module</label>
+				<ul>
+					<li><div class="SLModule" id="SL script" draggable="true" ondragstart="drag(event)">SL script</div></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+   	<!-- <div>
+   		<p>Vector List</p>
+   		<p><ul id="ClayActivation"></ul></p>
+	</div> -->
+</div>
+<div id="CanvasContainer">
+	<canvas id="VectorCanvas" width=2500px height=2500px  ondrop="drop(event)"  ondragover="allowDrop(event)">
+	Your browser doesn't support canvas.
+	</canvas>
+</div>
+<!-- <div id="ClayLog"></div> -->
+<div id="ClayAttribute">
+	<table style="color:#293146;">
+		<tr>
+			<td>ID</td>
+			<td id="AttrID"></td>
+			<td>Type</td>
+			<td id="AttrVectorType"></td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td colspan="3"><input style="color:#8b9fb6;height:40px;" id="AttrName" onkeyup="nameChange()" type="text"></td>
+		</tr>
+		<tr>
+			<td>X</td>
+			<td id="AttrX"></td>
+			<td>Y</td>
+			<td id="AttrY"></td>
+		</tr>
+		<tr>
+			<td id="AttrScript" colspan="4"></td>
+		</tr>
+		<tr>
+			<td colspan="4"><button class="button release" onclick="releaseLink()">release</button></td>
+		</tr>
+		<tr>
+			<td colspan="4"><div id="minimap">
+				<canvas id="CloneCanvas"></canvas>
+			</div></td>
+		</tr>
+	</table>
+</div>
+<div id="CanvasSubMenu"></div>
+<div id="BottomMenu">
+	<div class="progress">
+    	<div id="RunProgress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%"></div>
+	</div>
+	<ul>
+		<li><i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp;NEW</li>
+		<li><i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>&nbsp;SAVE</li>
+		<li><i class="fa fa-play" aria-hidden="true"></i>&nbsp;RUN</li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+$(document).ready(function() {});
+$(function () {
+	$(document).keydown(function(e) {
+		if(e.keyCode == 81)	// q를 누르면
+			alert(CKEDITOR.instances.editor.getData());
+	});
+});
+</script>
+</head>
+<body>
+<br>
+<br>
+<br>
+<textarea id="editor" name="editor"></textarea>
+<script>
+	CKEDITOR.replace('editor');
+</script>
+</body>
+</html>

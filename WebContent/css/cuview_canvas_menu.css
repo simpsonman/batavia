@@ -1,0 +1,14 @@
+body{
+	margin: 0px;
+	background-color: #ffffff;
+}
+#CanvasMenuList{
+	border: 1px solid black;
+	margin: 0; 
+	padding: 0;
+}
+#CanvasMenuList li{
+	list-style-type:none;
+	margin: 10px;
+	cursor: pointer;
+}

@@ -1,0 +1,76 @@
+<html>
+<head>
+	<style>
+	body{
+	margin: 0px;
+}
+		#full{
+			background: #777777;
+		}
+		#minimap{
+			border: 1px solid red;
+		}
+		#mappanel{
+			position: fixed;
+			bottom:0;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	$(function () {
+		var $w = $(window);
+		// 38up down40
+		// 37<< >>39
+		$(document).keydown(function(e) {
+			if(e.keyCode == 39){
+				
+			}
+		});
+		
+		$("#full").on('mousewheel DOMMouseScroll', function(e) {
+			$("#log").text($w.scrollLeft()+","+$w.scrollTop()+","+$(document).width()+","+$(document).height()+","+$(window).width()+","+$(window).height());
+			var mapCanvas = document.getElementById("minimap");
+			var ctx = mapCanvas.getContext('2d');
+		});
+		
+		var oldCanvas = document.getElementById("full");
+		var ctx = oldCanvas.getContext('2d');
+		ctx.beginPath();
+		ctx.fillStyle="red";
+		ctx.moveTo(0,0);
+		ctx.lineTo(100,100);
+		ctx.stroke();
+		cloneCanvas(oldCanvas);
+		$("#full").on('mousewheel DOMMouseScroll', function(e) {
+			var E = e.originalEvent;
+			if(E.detail){
+				var direrct = E.detail * -40;
+				viewScale += (direrct > 0)?0.01:viewScale - 0.01;
+			}
+		});
+		
+		
+		$("#log").text($w.scrollLeft()+","+$w.scrollTop()+","+$w.width()+","+$w.height());
+	        
+	    
+	});
+
+	function cloneCanvas(oldCanvas) {
+	    var newCanvas = document.getElementById("minimap");
+	    var context = newCanvas.getContext('2d');
+	    context.scale(0.2, 0.2)
+		context.drawImage(oldCanvas, 0, 0);
+	    return newCanvas;
+	}
+	</script>
+</head>
+<body>
+	<div id="mappanel">
+		<canvas id="minimap" width="200px" height="100px"></canvas>
+		<div id="log"></div>
+	</div>
+	
+	<canvas id="full" width="10000px" height="5000px"></canvas><br>
+</body>
+</html>
